@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # Sin el repo hermano, el build lee los avisos de musubi-app (main) en GitHub.
+      - run: node build.mjs
+      - name: Paginas esperadas
+        run: |
+          for f in index.html privacidad.html terminos.html eliminar-cuenta.html 404.html sitemap.xml _headers robots.txt; do
+            test -s "dist/$f" || { echo "falta dist/$f"; exit 1; }
+          done
+      - name: Sin scripts ni recursos externos
+        run: |
+          if grep -RInE '<script|https?://(fonts|cdn|www\.google|googletagmanager)' dist --include='*.html'; then
+            echo "El sitio no carga JavaScript ni recursos de terceros"; exit 1
+          fi
