@@ -1,0 +1,11 @@
+// Despliegue en Cloudflare Workers con archivos estaticos (sin codigo de servidor).
+// El build (node build.mjs) genera dist/; Cloudflare respeta dist/_headers.
+{
+  "name": "musubi-landing",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

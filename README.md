@@ -35,14 +35,15 @@ python -m http.server 8765 --directory dist        # vista previa en http://127.
 | `src/static/` | `styles.css` (tokens de la guía de estilo de la app), `favicon.svg`, fuentes Plus Jakarta Sans (OFL), `_headers` y `robots.txt` |
 | `.github/workflows/ci.yml` | Build, páginas esperadas y que no haya scripts ni recursos de terceros |
 
-## Despliegue (Cloudflare Pages)
+## Despliegue (Cloudflare Workers con archivos estáticos)
 
-- Proyecto conectado a este repo en la rama `main`.
-  - Build command: `node build.mjs`.
-  - Output directory: `dist`.
-- Dominios personalizados: `musubiapp.com.mx` y `www.musubiapp.com.mx`.
-- Cada push a `main` despliega solo; cada PR tiene su vista previa.
-- Si cambian los avisos en `musubi-app`, vuelve a desplegar (Cloudflare Pages → *Retry deployment*).
+- **Proyecto:** Worker `musubi-landing`, conectado a este repo (Workers Builds) y configurado en `wrangler.jsonc`. Solo sirve `dist/`: no hay código de servidor.
+- **Build command:** `node build.mjs`.
+- **Deploy command:** `npx wrangler deploy`.
+- **Comando de vista previa (otras ramas):** `npx wrangler versions upload`.
+- **Dominios** (Settings → Domains & Routes): `musubiapp.com.mx` y `www.musubiapp.com.mx`.
+- **Despliegue:** cada push a `main` despliega solo y cada PR tiene su vista previa.
+- **Avisos de `musubi-app`:** si cambian, vuelve a desplegar desde Deployments.
 
 ## Reglas
 
