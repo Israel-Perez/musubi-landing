@@ -151,7 +151,9 @@ p { margin: 0 0 14px; }
   }
 }
 
-.home-page { position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); line-height: normal; -webkit-font-smoothing: antialiased; }
+/* Una sola pantalla, sin scroll: el alto es el de la ventana visible (dvh en celular). */
+body.home { overflow: hidden; }
+.home-page { position: relative; overflow: hidden; overflow: clip; height: 100vh; height: 100dvh; display: flex; flex-direction: column; background: var(--bg); color: var(--ink); line-height: normal; -webkit-font-smoothing: antialiased; }
 .home-glow { position: absolute; right: -8%; top: -18%; width: 68%; height: 120%; pointer-events: none; background: radial-gradient(closest-side, var(--h-glow-a) 0%, var(--h-glow-b) 55%, rgba(215, 25, 31, 0) 100%); animation: topGlow 9s ease-in-out infinite; }
 .home-photo { position: absolute; top: 0; right: 0; bottom: 0; width: var(--h-photo-w); min-width: 320px; overflow: hidden; }
 .home-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; -webkit-mask-image: var(--h-photo-mask); mask-image: var(--h-photo-mask); animation: topPhoto 1.8s cubic-bezier(.2, .8, .2, 1) backwards; }
@@ -164,9 +166,9 @@ p { margin: 0 0 14px; }
 .home-badge { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--h-pill-line); background: var(--h-pill-bg); font-size: 13.5px; font-weight: 700; animation: topRise .7s .25s cubic-bezier(.2, .8, .2, 1) backwards; }
 .home-badge svg { flex: none; }
 
-.home-main { position: relative; flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 48px; padding: 28px 6% 36px; }
-.home-copy { flex: 1 1 400px; display: flex; flex-direction: column; gap: 30px; }
-.home-copy h1 { margin: 0; font-size: 84px; line-height: 82px; font-weight: 800; letter-spacing: -0.05em; animation: topRise .8s .15s cubic-bezier(.2, .8, .2, 1) backwards; }
+.home-main { position: relative; flex: 1 1 0; min-height: 0; display: flex; align-items: stretch; gap: 32px 48px; padding: clamp(12px, 3.5vh, 28px) 6% clamp(12px, 4.5vh, 36px); }
+.home-copy { flex: 1 1 400px; align-self: center; display: flex; flex-direction: column; gap: clamp(16px, 3.75vh, 30px); }
+.home-copy h1 { margin: 0; font-size: min(84px, 11.5vh, 8.4vw); line-height: 0.976; font-weight: 800; letter-spacing: -0.05em; animation: topRise .8s .15s cubic-bezier(.2, .8, .2, 1) backwards; }
 .home-copy em { color: var(--h-em); }
 .home-copy p { margin: 0; max-width: 400px; font-size: 20px; line-height: 30px; font-weight: 500; color: var(--h-lead); animation: topRise .8s .3s cubic-bezier(.2, .8, .2, 1) backwards; }
 .home-cta { align-self: flex-start; display: flex; align-items: center; gap: 14px; min-height: 72px; padding: 12px 34px 12px 24px; border-radius: 22px; background: var(--h-cta-bg); color: var(--h-cta-ink); text-decoration: none; box-shadow: var(--h-cta-shadow); transition: transform .25s ease, box-shadow .25s ease; animation: topRise .8s .45s cubic-bezier(.2, .8, .2, 1) backwards, topPulse 2.2s 1.3s ease-in-out infinite; }
@@ -177,7 +179,7 @@ p { margin: 0 0 14px; }
 .home-cta-small { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; }
 .home-cta-big { font-size: 25px; line-height: 28px; font-weight: 800; letter-spacing: -0.02em; }
 
-.home-chips { flex: 1.45 1 480px; position: relative; min-height: 640px; }
+.home-chips { flex: 1.45 1 480px; position: relative; min-height: 0; }
 .home-chip { position: absolute; display: flex; align-items: center; white-space: nowrap; background: #FFFFFF; color: var(--h-chip-ink); font-weight: 800; box-shadow: var(--h-chip-shadow); }
 .home-chip svg { flex: none; }
 .home-chip-a { left: -5%; top: 3%; gap: 12px; padding: 12px 18px 12px 12px; border-radius: 20px; animation: topPopA .7s .9s cubic-bezier(.2, .9, .3, 1.25) backwards, topFloatA 6s 1.6s ease-in-out infinite; }
@@ -193,23 +195,46 @@ p { margin: 0 0 14px; }
 .home-legal a { min-height: 44px; padding: 0 12px; display: flex; align-items: center; color: var(--h-foot); text-decoration: none; }
 .home-legal a:hover { color: var(--h-foot); }
 
-/* Celular: el texto arriba y la foto abajo, detras de las etiquetas. */
-@media (max-width: 640px) {
+/* Celular y tableta: el texto arriba y la foto abajo, detras de las etiquetas, todo en una pantalla. */
+@media (max-width: 900px) {
   .home {
-    --h-photo-mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 20%, #000 36%);
-    --h-photo-fade: linear-gradient(to top, var(--bg) 0%, var(--bg) 8%, rgba(0, 0, 0, 0) 34%);
+    --h-photo-mask: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 18%, #000 34%);
+    --h-photo-fade: linear-gradient(to top, var(--bg) 0%, var(--bg) 10%, rgba(0, 0, 0, 0) 36%);
   }
-  .home-header { flex-wrap: wrap; padding-top: 20px; gap: 14px 16px; }
-  .home-main { padding-top: 24px; }
-  .home-copy { gap: 24px; }
-  .home-copy h1 { font-size: clamp(44px, 15vw, 84px); line-height: 0.98; }
-  .home-copy p { font-size: 18px; line-height: 27px; }
-  .home-photo { top: auto; left: 0; width: 100%; min-width: 0; height: 760px; }
-  .home-chips { min-height: 480px; }
-  .home-chip-a { left: 0; top: 6%; }
-  .home-chip-b { right: 0; top: 46%; }
-  .home-chip-c { left: 0; bottom: 6%; }
+  .home-header { padding: 16px 16px 0; gap: 10px; }
+  .home-brand { gap: 8px; }
+  .home-logo { width: 44px; height: 28px; }
+  .home-brand span { font-size: 23px; }
+  .home-badge { padding: 7px 11px; gap: 6px; font-size: 12px; }
+  .home-badge svg { width: 14px; height: 14px; }
+  .home-main { flex-direction: column; gap: 12px; padding: clamp(10px, 3vh, 24px) 16px 6px; }
+  .home-copy { flex: none; align-self: stretch; gap: clamp(10px, 2.4vh, 22px); }
+  .home-copy h1 { font-size: min(84px, 15vw, 9vh); line-height: 0.98; }
+  .home-copy p { font-size: clamp(15px, 2.4vh, 18px); line-height: 1.45; }
+  .home-cta { min-height: 58px; gap: 12px; padding: 9px 26px 9px 18px; border-radius: 18px; }
+  .home-cta:focus-visible { border-radius: 18px; }
+  .home-cta svg { width: 26px; height: 26px; }
+  .home-cta-small { font-size: 10.5px; }
+  .home-cta-big { font-size: 21px; line-height: 24px; }
+  .home-chips { flex: 1 1 0; }
+  .home-photo { top: auto; left: 0; width: 100%; min-width: 0; height: 64%; }
+  .home-chip-a { left: 0; top: 4%; }
+  .home-chip-b { right: 0; top: 44%; }
+  .home-chip-c { left: 0; bottom: 4%; }
+  .home-footer { padding: 6px 16px 10px; gap: 2px 12px; }
+  .home-legal { order: 2; }
+  .home-social { order: 3; width: 100%; gap: 8px; }
+  .home-social span { width: 34px; height: 34px; }
+  .home-social svg { width: 16px; height: 16px; }
 }
+/* Celulares angostos (360 px): la insignia cabe en una linea junto al logo. */
+@media (max-width: 380px) {
+  .home-badge { white-space: nowrap; padding: 7px 10px; font-size: 11.5px; }
+  .home-badge svg { display: none; }
+}
+/* Pantallas muy bajas (celular acostado): menos etiquetas para que nada se encime. */
+@media (max-width: 900px) and (max-height: 640px) { .home-chip-b { display: none; } }
+@media (max-width: 900px) and (max-height: 540px) { .home-chips { visibility: hidden; } }
 
 @keyframes topFloatA { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-10px) rotate(-4deg); } }
 @keyframes topFloatB { 0%, 100% { transform: translateY(0) rotate(3deg); } 50% { transform: translateY(8px) rotate(3deg); } }
