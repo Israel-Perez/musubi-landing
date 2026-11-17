@@ -31,8 +31,8 @@ python -m http.server 8765 --directory dist        # vista previa en http://127.
 | Ruta | Contenido |
 |---|---|
 | `build.mjs` | Generador: plantilla común, Markdown de los avisos, `sitemap.xml` y revisión de enlaces |
-| `src/pages/*.html` | Páginas propias (`index`, `eliminar-cuenta`, `404`). La primera línea es `<!-- título \| descripción -->` |
-| `src/static/` | `styles.css` (tokens de la guía de estilo de la app), `favicon.svg`, fuentes Plus Jakarta Sans (OFL), `_headers` y `robots.txt` |
+| `src/pages/*.html` | Páginas propias (`index`, `eliminar-cuenta`, `404`). La primera línea es `<!-- título \| descripción -->`. El inicio es de pantalla completa y trae su propio encabezado y pie; las demás usan los de la plantilla |
+| `src/static/` | `styles.css` (tokens de la guía de estilo de la app y estilos del inicio, en claro y oscuro), `musubi-hero.jpg` (foto del inicio), `favicon.svg`, fuentes Plus Jakarta Sans (OFL), `_headers` y `robots.txt` |
 | `.github/workflows/ci.yml` | Build, páginas esperadas y que no haya scripts ni recursos de terceros |
 
 ## Despliegue (Cloudflare Workers con archivos estáticos)
