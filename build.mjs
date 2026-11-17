@@ -86,6 +86,8 @@ const logo = (cls = 'logo') =>
 function layout({ path, title, description, body }) {
   const url = path ? `${site}/${path}` : `${site}/`;
   const fullTitle = path ? `${title} · Musubi` : title;
+  // El inicio trae su propio encabezado y pie (diseño de pantalla completa).
+  const home = path === '';
   const nav = [
     ['', 'Inicio'],
     ['privacidad', 'Privacidad'],
@@ -107,12 +109,17 @@ function layout({ path, title, description, body }) {
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#17171A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="${home ? '#0E0E10' : '#17171A'}" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/PlusJakartaSans-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+${home ? `<body class="home">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+${body}
+</body>
+</html>
+` : `<body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="site-header">
   <div class="wrap header-row">
@@ -137,7 +144,7 @@ ${body}
 </footer>
 </body>
 </html>
-`;
+`}`;
 }
 
 async function main() {
