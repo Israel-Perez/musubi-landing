@@ -183,6 +183,6 @@ test('assetlinks.json: el paquete de la app y huellas SHA-256 validas', async ()
   assert.equal(links.length, 1);
   assert.deepEqual(links[0].relation, ['delegate_permission/common.handle_all_urls']);
   assert.equal(links[0].target.package_name, 'com.musubi.app');
-  assert.ok(links[0].target.sha256_cert_fingerprints.length >= 1);
+  assert.equal(links[0].target.sha256_cert_fingerprints.length, 2); // llave de subida y firma de Google Play
   for (const fp of links[0].target.sha256_cert_fingerprints) assert.match(fp, /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/);
 });
