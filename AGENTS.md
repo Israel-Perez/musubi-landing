@@ -4,7 +4,8 @@ Sitio público estático de Musubi (`musubiapp.com.mx`). Lee `README.md` antes d
 
 ## Reglas
 - **Avisos legales:** su única fuente es `musubi-app/assets/legal/*.md`. Nunca copies ni edites su texto aquí.
-- **Sin JavaScript, analíticas, cookies ni recursos de terceros.** La CSP de `src/static/_headers` los bloquea y el CI lo revisa. Fuentes y SVG van empaquetados.
+- **Sin JavaScript en el navegador, analíticas, cookies ni recursos de terceros.** La CSP de `src/static/_headers` los bloquea y el CI lo revisa. Fuentes y SVG van empaquetados.
+- **Worker (HU-61):** el único código de servidor es `worker/`, y solo para `/p/{id}`. Solo lee el detalle público de la API, escapa todo lo que viene de ella y usa los mismos encabezados de `_headers` (lo prueba `test/worker.test.mjs`). La foto de la API es la única imagen externa permitida.
 - **Todo lo que el sitio diga de la app** (funciones, datos, plazos) debe coincidir con el aviso de privacidad y con lo que la app hace hoy. Si algo no existe todavía, dilo ("muy pronto").
 - **Marca:**
   - colores de la guía de estilo (`musubi-app/lib/core/theme/musubi_tokens.dart`), con modo oscuro por `prefers-color-scheme`;
@@ -15,5 +16,6 @@ Sitio público estático de Musubi (`musubiapp.com.mx`). Lee `README.md` antes d
 
 ## Verificación
 - `node build.mjs` termina con `ok`: sin enlaces rotos y con los avisos encontrados.
+- `node --test` en verde (Worker de `/p/{id}`).
 - Revisa a 390 px y a 1280 px, en claro y en oscuro.
 - El YAML del CI pasa `actionlint .github/workflows/ci.yml`.

@@ -16,9 +16,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # Sin el repo hermano, el build lee los avisos de musubi-app (main) en GitHub.
       - run: node build.mjs
+      # HU-61: el Worker de /p/{id} (vista previa de un producto compartido).
+      - run: node --test
       - name: Paginas esperadas
         run: |
-          for f in index.html privacidad.html terminos.html eliminar-cuenta.html 404.html sitemap.xml _headers robots.txt; do
+          for f in index.html privacidad.html terminos.html eliminar-cuenta.html 404.html sitemap.xml _headers robots.txt .well-known/assetlinks.json; do
             test -s "dist/$f" || { echo "falta dist/$f"; exit 1; }
           done
       - name: Sin scripts ni recursos externos
