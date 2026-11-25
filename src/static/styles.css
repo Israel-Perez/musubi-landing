@@ -85,6 +85,27 @@ p { margin: 0 0 14px; }
 .legal .source { margin-top: 40px; padding: 14px 16px; border-radius: 14px; background: var(--surface); color: var(--muted); font-size: 14px; }
 .notfound { padding-top: 72px; padding-bottom: 96px; }
 
+/* Producto compartido (HU-61, /p/{id}): lo arma worker/index.js */
+.share { max-width: 560px; padding-top: 32px; padding-bottom: 64px; }
+.share-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.share-photo { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; background: var(--surface); }
+.share-photo-empty { min-height: 200px; }
+.share-info { padding: 18px 20px 20px; }
+.share-kicker { margin: 0 0 6px; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.share-info h1 { font-size: clamp(22px, 5vw, 28px); margin-bottom: 8px; overflow-wrap: anywhere; }
+.share-price { display: flex; align-items: center; gap: 10px; margin: 0 0 4px; font-size: 26px; font-weight: 800; color: var(--brand-text); }
+.share-badge { padding: 4px 10px; border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 700; }
+.share-meta { margin: 0; color: var(--muted); font-weight: 600; }
+.share-actions { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 16px; }
+.share-open, .share-play { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 20px; border-radius: 14px; font-weight: 800; text-decoration: none; }
+.share-open { background: var(--brand); color: #FFFFFF; }
+.share-open:hover { background: var(--brand-strong); color: #FFFFFF; }
+.share-play { background: var(--ink); color: var(--bg); }
+.share-play:hover { color: var(--bg); opacity: 0.9; }
+.share-play svg { flex: none; fill: #FF4046; }
+.share-empty { padding-top: 56px; }
+.share-note { margin-top: 4px; }
+
 .site-footer { border-top: 1px solid var(--divider); background: var(--surface); }
 .footer-row { display: grid; gap: 14px; padding-top: 28px; padding-bottom: 32px; }
 .footer-brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 18px; }

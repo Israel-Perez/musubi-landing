@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.musubi.app",
+      "sha256_cert_fingerprints": [
+        "98:BB:B0:9E:CD:93:5E:6E:6A:06:94:40:68:2C:9E:B5:E9:64:7B:7D:42:4A:30:10:92:3B:95:73:CF:CD:61:93"
+      ]
+    }
+  }
+]

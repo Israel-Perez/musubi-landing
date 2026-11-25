@@ -1,11 +1,21 @@
-// Despliegue en Cloudflare Workers con archivos estaticos (sin codigo de servidor).
-// El build (node build.mjs) genera dist/; Cloudflare respeta dist/_headers.
+// Despliegue en Cloudflare Workers.
+// - Los archivos estaticos de dist/ (node build.mjs) se sirven como siempre y
+//   Cloudflare respeta dist/_headers.
+// - HU-61: el Worker (worker/index.js) solo atiende /p/{id}, la vista previa de
+//   un producto compartido desde la app. Lee el detalle publico en la API y no
+//   manda JavaScript al navegador.
 {
   "name": "musubi-landing",
+  "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/p/*"]
+  },
+  "vars": {
+    "API_ORIGIN": "https://api.musubiapp.com.mx"
   }
 }

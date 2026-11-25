@@ -83,7 +83,7 @@ const logo = (cls = 'logo') =>
   '<path d="M40 34A14 14 0 0 1 26.84 24.79" class="ring-ink" stroke-width="6"/>' +
   '</svg>';
 
-function layout({ path, title, description, body }) {
+function layout({ path, title, description, body, head = '' }) {
   const url = path ? `${site}/${path}` : `${site}/`;
   const fullTitle = path ? `${title} · Musubi` : title;
   // El inicio trae su propio encabezado y pie (diseño de pantalla completa).
@@ -108,7 +108,7 @@ function layout({ path, title, description, body }) {
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
-<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+${head ? `${head}\n` : ''}<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="${home ? '#0E0E10' : '#17171A'}" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/PlusJakartaSans-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
@@ -194,7 +194,21 @@ async function main() {
       if (!known.has(href) && !existsSync(join(dist, href))) throw new Error(`${page.file}: enlace roto ${href}`);
     }
   }
-  console.log(`ok: ${pages.length} paginas en dist/`);
+  // HU-61: la plantilla de /p/{id} para el Worker (worker/index.js), con el
+  // mismo encabezado, pie y estilos del sitio. El Worker la rellena en una
+  // sola pasada con valores ya escapados.
+  const shell = layout({
+    path: 'p/{{ID}}',
+    title: '{{TITLE}}',
+    description: '{{DESCRIPTION}}',
+    head: '{{HEAD}}',
+    body: '{{BODY}}',
+  });
+  await writeFile(
+    join(root, 'worker', 'shell.generated.js'),
+    `// Generado por build.mjs: no lo edites.\nexport const shell = ${JSON.stringify(shell)};\n`,
+  );
+  console.log(`ok: ${pages.length} paginas en dist/ y la plantilla de /p/{id}`);
 }
 
 main().catch((err) => {
