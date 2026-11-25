@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.musubi.app",
       "sha256_cert_fingerprints": [
-        "98:BB:B0:9E:CD:93:5E:6E:6A:06:94:40:68:2C:9E:B5:E9:64:7B:7D:42:4A:30:10:92:3B:95:73:CF:CD:61:93"
+        "98:BB:B0:9E:CD:93:5E:6E:6A:06:94:40:68:2C:9E:B5:E9:64:7B:7D:42:4A:30:10:92:3B:95:73:CF:CD:61:93",
+        "93:23:BC:19:AD:8D:75:64:A6:F8:0F:BE:7D:46:B3:5C:E8:12:A9:D6:A5:A6:08:76:11:31:FE:71:02:45:C5:2D"
       ]
     }
   }
