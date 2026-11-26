@@ -211,7 +211,9 @@ body.home { overflow: hidden; }
 
 .home-footer { position: relative; padding: 14px 6%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; background: linear-gradient(to right, transparent 0%, var(--h-line) 22%, var(--h-line) 40%, transparent 68%) top left / 100% 1px no-repeat; font-size: 13.5px; font-weight: 600; color: var(--h-foot); animation: topFade 1s .9s ease backwards; }
 .home-social { display: flex; gap: 10px; }
-.home-social span { width: 46px; height: 46px; border-radius: 23px; border: 1px solid var(--h-soc-line); background: var(--h-soc-bg); color: var(--ink); display: flex; align-items: center; justify-content: center; }
+.home-social a { width: 46px; height: 46px; border-radius: 23px; border: 1px solid var(--h-soc-line); background: var(--h-soc-bg); color: var(--ink); display: flex; align-items: center; justify-content: center; }
+.home-social a:hover { border-color: var(--ink); }
+.home-social a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .home-legal { display: flex; gap: 4px; }
 .home-legal a { min-height: 44px; padding: 0 12px; display: flex; align-items: center; color: var(--h-foot); text-decoration: none; }
 .home-legal a:hover { color: var(--h-foot); }
@@ -245,7 +247,7 @@ body.home { overflow: hidden; }
   .home-footer { padding: 6px 16px 10px; gap: 2px 12px; }
   .home-legal { order: 2; }
   .home-social { order: 3; width: 100%; gap: 8px; }
-  .home-social span { width: 34px; height: 34px; }
+  .home-social a { width: 34px; height: 34px; }
   .home-social svg { width: 16px; height: 16px; }
 }
 /* Celulares angostos (360 px): la insignia cabe en una linea junto al logo. */
